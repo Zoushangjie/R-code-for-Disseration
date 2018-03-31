@@ -1,0 +1,37 @@
+setwd("F:/学习资料/黄巍实验室/第二个计划--拟南芥TOC1的RNAi鉴定")
+Ara.data <- read.csv("Biomass.csv")
+attach(Ara.data)
+View(Ara.data)
+Ara.data[4] = c(rep(0,26),rep(1,25))
+Ara.sam=Ara.data[1:51,]
+Ara.test=Ara.data[1:51,]
+
+plot(Ara.sam[,1:2],col=Ara.sam$V4)
+# wrong
+kc = kmeans(Ara.sam[1:2],2)
+plot(Ara.sam[1:2],col=kc$cluster)
+boxplot(hypocotyl~V4,data=Ara.data)
+
+
+plot(Ara.data[c("Leaf.width", "hypocotyl")], col = kc$cluster, pch=as.integer(Ara.data$V4))
+points(kc$centers[,c("Leaf.width", "hypocotyl")], col = 1:3, pch = 8, cex=2)
+
+
+
+library("e1071")
+svm.fit = svm(V4~hypocotyl+Leaf.width,data=training.set,degree=3,cost=1,gamma=0.5)
+svm.pre = ifelse(predict(svm.fit)>0.30,1,0)
+col = ifelse(svm.pre==0,"red","blue")
+plot(Leaf.width,hypocotyl,col=col)
+#100%
+
+
+#检测模型
+for(i in 1:10){
+for(j in 1:20){
+for(k in 1:10){
+   svm.fit=svm.fit = svm(V4~hypocotyl+Leaf.width,data=Ara.data,degree=i,cost=j,gamma=k)
+   svm.pre = ifelse(predict(svm.fit)>0.3,1,0)
+   n=ifelse(svm.pre==Ara.data[4],1,0)
+   result = c(i,j,k,sum(n))
+   a = rbind(a,result)}}}
