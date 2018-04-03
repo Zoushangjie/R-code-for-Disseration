@@ -1,0 +1,6 @@
+setwd("C:/Users/Administrator/Desktop/╠ор╣бшнд/Dissertation/")
+data_LNK=read.csv("LNK1.csv")
+attach(data_LNK)
+library("ggplot2")
+View(data_LNK)
+ggplot(data_LNK,aes(x=reorder(Strain,Luc),y=Luc))+geom_bar(stat="identity",width = 0.5,fill="Black")+theme_bw()+theme(panel.border = element_blank(),panel.grid.major = element_blank(), panel.grid.minor=element_blank(),axis.line = element_line(colour = "black"))
