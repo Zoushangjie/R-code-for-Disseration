@@ -1,0 +1,50 @@
+Call:
+glm(formula = pp ~ qq, family = binomial(link = "logit"), data = data_sur)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.3618  -0.8065  -0.5938  -0.3078   2.4792  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -3.71575    0.17151  -21.66   <2e-16 ***
+qq           0.68991    0.04263   16.18   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3780.3  on 3413  degrees of freedom
+Residual deviance: 3477.7  on 3412  degrees of freedom
+AIC: 3481.7
+
+Number of Fisher Scoring iterations: 4
+
+
+code：
+library("DAAG")
+setwd("F:/学习资料/攀登计划/论文")
+data_sur=read.csv("广东省民众对转基因农作物的认知和态度的社会调研[复制].csv")
+attach(data_sur)
+head(data_sur)
+n=3414
+pp=vector("numeric",n)
+for(i in 1:n){
+if(willingto[i]!=1){willingto[i]=0}
+pp[i]=willingto[i]}
+qq=vector("numeric",n)
+for(i in 1:n){
+if(了解程度[i]==1){qq[i]=6}
+if(了解程度[i]==2){qq[i]=5}
+if(了解程度[i]==3){qq[i]=4}
+if(了解程度[i]==4){qq[i]=3}
+if(了解程度[i]==5){qq[i]=2}
+if(了解程度[i]==6){qq[i]=1}
+}
+cdplot(factor(pp)~qq,data=data_sur,main="条件密度图",ylab="愿意程度",xlab="了解程度")
+analysis=glm(pp~qq,family=binomial(link="logit"),data=data_sur)
+summary(analysis)
+x=seq(from=1,to=6,length.out = 3414)
+y=predict(analysis,data.frame(qq=x),type="response")
+plot(willingto~qq,pch=16,col="red",data=data_sur,xlim=c(0.5,6),ylim=c(0,0.6),main="logistic regression",ylab="愿意食用转基因的概率", xlab="了解程度")
+lines(y~x,lty=10,col="blue")
