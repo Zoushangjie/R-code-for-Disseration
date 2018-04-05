@@ -1,0 +1,23 @@
+# Window size
+setwd("E:/原F盘/学习资料/大四/LSTM-Disulfide/Result")
+data_win <- read.csv("windowSize.csv")
+attach(data_win)
+library("ggplot2")
+ggplot(data_win,aes(window.size,Qc,group=Model,color=Model))+geom_point()+geom_line(lwd=1.1)+theme(
+  panel.background = element_rect(fill = "transparent",colour = NA), 
+  panel.grid.minor = element_blank(), 
+  panel.grid.major = element_blank(),
+  plot.background = element_rect(fill = "transparent",colour = NA))+theme(axis.line.x=element_line(linetype=1,color="black",size=1),
+                                                                          axis.ticks.y=element_line(color="black",size=1,lineend = 22))+theme(axis.line.y=element_line(linetype=1,color="black",size=1),
+                                                                                                                                              axis.ticks.x=element_line(color="black",size=1,lineend = 22))
+savePlot(filename = "Qc-window", type = "tif", device = dev.cur(),restoreConsole = TRUE) #只能在Rgui中跑
+tiff(file="Fig.tif",width=72, height=85, units='mm',res=1200,compression='lzw',pointsize=6)
+
+
+#ggplot(data_win,aes(window.size,Qp,group=Model,color=Model))+geom_point()+geom_line(lwd=1.1)+theme(panel.background = element_rect(fill = "transparent",colour = NA), 
+#panel.grid.minor = element_blank(), 
+#panel.grid.major = element_blank(),
+#plot.background = element_rect(fill = "transparent",colour = NA))+theme(axis.line.x=element_line(linetype=1,color="black",size=1),
+#axis.ticks.y=element_line(color="black",size=1,lineend = 22))+theme(axis.line.y=element_line(linetype=1,color="black",size=1),
+ #                                                                   axis.ticks.x=element_line(color="black",size=1,lineend = 22))
+
