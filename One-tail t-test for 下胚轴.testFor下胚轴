@@ -1,0 +1,4 @@
+setwd("C:/Users/Administrator/Desktop/±ÏÒµÂÛÎÄ/Dissertation/Dissertation ´æµµ")
+data_Long=read.csv("NewBiomass.csv")
+attach(data_Long)
+t.test(Xhypo,Y,alternative = "less")
