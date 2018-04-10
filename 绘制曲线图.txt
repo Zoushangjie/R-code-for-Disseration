@@ -1,0 +1,5 @@
+ggplot(kind.data,aes(time,lethaltyRate,group=kind,color=kind))+geom_point()+geom_line(lwd=1.1)+geom_errorbar(aes(ymin=lethaltyRate-std*100,ymax=lethaltyRate+std*100),width=6,position = position_dodge(0.05))
+
+
+
+ggplot(cry4Ba.data,aes(Time,lethallty.rate...,group=Concentrations,color=Concentrations))+geom_point()+geom_line(lwd=1.1)+geom_errorbar(aes(ymin=lethallty.rate...-sd,ymax=lethallty.rate...+sd),width=6,position = position_dodge(0.05))+scale_x_continuous(limits=c(2,50),breaks=seq(2,50,2))+labs(title="lethallty rate of different cry4Ba concentrations")
