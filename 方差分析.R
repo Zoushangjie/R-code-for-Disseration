@@ -1,0 +1,8 @@
+setwd("C:/Users/Administrator/Desktop/毕业论文/第二个计划--拟南芥TOC1的RNAi鉴定/")
+data_length=read.csv('Biomass.csv')
+attach(data_length)
+View(data_length)
+F=factor(c(rep(1,26),rep(2,23)))
+lamp=data.frame(hypocotyl,F)
+lamp.aov = aov(hypocotyl~F,data=lamp)
+summary(lamp.aov)
