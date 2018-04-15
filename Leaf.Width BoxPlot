@@ -1,0 +1,6 @@
+setwd("C:/Users/Administrator/Desktop/毕业论文/第二个计划--拟南芥TOC1的RNAi鉴定")
+data_Biomass=read.csv("Biomass.csv")
+attach(data_Biomass)
+library("ggplot2")
+View(data_Biomass)
+ggplot(data_Biomass,aes(x=type,y=LeafWidth))+geom_boxplot(aes(fill="White"))
